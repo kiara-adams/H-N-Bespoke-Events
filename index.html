@@ -26,39 +26,41 @@
 
   <div class="nav">
 
-    <div class="nav-left">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-    </div>
-
-    <div class="nav-center">
+    <div class="nav-logo">
       <img src="./cropped-h_n_logo-removebg-preview-295x300.png" alt="Bespoke Hen Events" class="logo">
     </div>
 
-    <div class="nav-right">
-      <a href="#">Services</a>
+    <div class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
       <a href="#">Gallery</a>
-      <button class="burger" id="burger" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
 
-    <!-- CTA moved out of nav-right into its own container so it can sit at the far right -->
-    <div class="nav-cta">
+    <div class="nav-contact">
       <button class="contact-btn">Contact</button>
     </div>
+
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
   </div>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Gallery</a>
-    <button class="contact-btn">Contact</button>
+    <button class="close-btn" id="closeBtn">&times;</button>
+    <div class="mobile-menu-content">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <!-- <a href="#">Gallery</a> -->
+      <button class="contact-btn">Contact</button>
+    </div>
   </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
 
 </section>
 
@@ -198,7 +200,7 @@
     <img src="./image/1 (13).jpg" alt="Event image">
   </div>
   <div class="outline">
-          <a href="#" class="btn-outline-1">About Us</a>
+          <a href="./services.html" class="btn-outline-1">View All Work</a>
 </div>
 </section>
 
@@ -406,8 +408,8 @@
     <!-- Quick Links -->
     <div class="footer-links">
       <h4>Quick Links</h4>
-      <a href="#">About Us</a>
-      <a href="#">Services</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
       <a href="#">Testimonials</a>
       <a href="#">Portfolio</a>
       <a href="#">Blog</a>
@@ -515,10 +517,19 @@
 
   const burger = document.getElementById("burger");
   const mobileMenu = document.getElementById("mobileMenu");
+  const mobileOverlay = document.getElementById("mobileOverlay");
+  const closeBtn = document.getElementById("closeBtn");
 
-  burger.addEventListener("click", () => {
+  const toggleMenu = () => {
     mobileMenu.classList.toggle("active");
-  });
+    mobileOverlay.classList.toggle("active");
+    burger.classList.toggle("active");
+    document.body.style.overflow = mobileMenu.classList.contains("active") ? "hidden" : "";
+  };
+
+  burger.addEventListener("click", toggleMenu);
+  mobileOverlay.addEventListener("click", toggleMenu);
+  closeBtn.addEventListener("click", toggleMenu);
 
   // NAVBAR SCROLL BEHAVIOR: add translucent pink background when scrolling
   const navbar = document.querySelector('.navbar');
